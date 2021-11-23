@@ -323,54 +323,44 @@
                         <li class="nav-main-item">
                             <a class="nav-main-link" href="be_pages_dashboard.html">
                                 <i class="nav-main-link-icon si si-speedometer"></i>
-                                <span class="nav-main-link-name">Dashboard</span>
+                                <span class="nav-main-link-name">Početna strana</span>
                             </a>
                         </li>
-                        <li class="nav-main-heading">User Interface</li>
+                        <li class="nav-main-heading">Katergorije</li>
                         <li class="nav-main-item">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                 <i class="nav-main-link-icon si si-note"></i>
-                                <span class="nav-main-link-name">Forms</span>
+                                <span class="nav-main-link-name">Činjenice</span>
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="be_forms_elements.html">
-                                        <span class="nav-main-link-name">Elements</span>
+                                        <span class="nav-main-link-name">Zdravlje</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="be_forms_custom_controls.html">
-                                        <span class="nav-main-link-name">Custom Controls</span>
+                                        <span class="nav-main-link-name">Životinje</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="be_forms_layouts.html">
-                                        <span class="nav-main-link-name">Layouts</span>
+                                        <span class="nav-main-link-name">Države</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="be_forms_input_groups.html">
-                                        <span class="nav-main-link-name">Input Groups</span>
+                                        <span class="nav-main-link-name">Svemir</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="be_forms_plugins.html">
-                                        <span class="nav-main-link-name">Plugins</span>
+                                        <span class="nav-main-link-name">Hrana</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link" href="be_forms_editors.html">
-                                        <span class="nav-main-link-name">Editors</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="be_forms_validation.html">
-                                        <span class="nav-main-link-name">Validation</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="be_forms_wizard.html">
-                                        <span class="nav-main-link-name">Wizard</span>
+                                    <a class="nav-main-link" href="be_forms_plugins.html">
+                                        <span class="nav-main-link-name">Opšte</span>
                                     </a>
                                 </li>
                             </ul>
@@ -476,50 +466,6 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-main-heading">Pages</li>
-                        <li class="nav-main-item">
-                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                <i class="nav-main-link-icon si si-fire"></i>
-                                <span class="nav-main-link-name">Error Pages</span>
-                            </a>
-                            <ul class="nav-main-submenu">
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="be_pages_error_all.html">
-                                        <span class="nav-main-link-name">All</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="op_error_400.html">
-                                        <span class="nav-main-link-name">400</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="op_error_401.html">
-                                        <span class="nav-main-link-name">401</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="op_error_403.html">
-                                        <span class="nav-main-link-name">403</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="op_error_404.html">
-                                        <span class="nav-main-link-name">404</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="op_error_500.html">
-                                        <span class="nav-main-link-name">500</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="op_error_503.html">
-                                        <span class="nav-main-link-name">503</span>
-                                    </a>
                                 </li>
                             </ul>
                         </li>

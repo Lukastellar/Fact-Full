@@ -13,14 +13,15 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function(){
+    return view('pages.dashboard');
+});
 
 Route::get('register', [UserController::class, 'register'])->name('register');
 Route::post('register-user', [UserController::class, 'register_post'])->name('register.post');
 Route::get('login', [UserController::class, 'login'])->name('login');
 Route::post('login-user', [UserController::class, 'login_post'])->name('login.post');
-Route::get('/', function(){
-   return view('pages.dashboard');
-});
+
 Route::group(['middleware' => 'auth:sanctum'], function(){
 
 });

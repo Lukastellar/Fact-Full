@@ -3,42 +3,32 @@
 @section('content')
 <form action="{{route('login.post')}}" method="POST">
     @csrf
-    <div class="flex flex-row overflow-hidden">
-        <!-- Section 1 -->
-        <div id="s_1" class="flex-none w-screen h-screen flex flex-col justify-center items-center gap-y-6 bg-green-100">
-            <div class="flex flex-row gap-x-6">
-                <div>
-                    <h3 class="text-center mb-2 font-bold">Username</h3>
-                    <input class="block border-2 border-gray-500 rounded outline-none" type="text" name="name">
-                </div>
-                <div>
-                    <h3 class="text-center mb-2 font-bold">Password</h3>
-                    <input class="block border-2 border-gray-500 rounded outline-none" type="password" name="password">
-                </div>
+    <div class="w-screen h-screen flex flex-col justify-center items-center gap-y-6 bg-yellow-100">
+        <div class="flex flex-row gap-x-6">
+            <div>
+                <h3 class="text-center mb-2 font-bold">Username</h3>
+                <input id="name" class="block border-2 border-gray-500 rounded outline-none" type="text" name="name">
             </div>
-            <button id="btn_s1" class="px-5 py-2 uppercase font-bold bg-green-600 text-white text-sm rounded" type="button">Next</button>
-        </div>
-        <!-- Section 2 -->
-        <div id="s_2" class="flex-none inline-flex w-screen h-screen flex flex-col justify-center items-center gap-y-6 bg-yellow-100">
-            <div class="flex flex-col gap-y-6 justify-center items-center">
-                <h1 class="font-bold text-xl text-gray-800">Customize your profile picture: </h1>
-                <input id="text" class="rounded outline-none" type="text" placeholder="Type your favourite name !">
-                <img id="random_avatar" class="w-32 h-32" src="https://avatars.dicebear.com/4.6/api/micah/hello.svg?mouth=laughing&background=%23000051" alt="ble">
+            <div>
+                <h3 class="text-center mb-2 font-bold">Password</h3>
+                <input id="password" class="block border-2 border-gray-500 rounded outline-none" type="password" name="password">
             </div>
-            <button class="px-5 py-2 uppercase font-bold bg-green-600 text-white text-sm rounded" type="submit">Submit</button>
         </div>
+        <button id="submit" class="px-5 py-2 uppercase font-bold bg-gray-800 text-white text-sm opacity-75 rounded" type="submit" disabled>Submit</button>
     </div>
 </form>
 <script>
-    $('#btn_s1').on('click', function(){
-        $('#s_2').animate({
-            marginLeft: "-100%"
-        }, 1300)
+    $(':text, :password').on('keyup', function(){
+        let password = $('#password').val().length;
+        let username = $('#name').val().length;
+        let button = $('#submit');
+        if( username > 0 && password > 0 ){
+            button.stop(true).delay(200).animate({ opacity: '1', }, 600)
+            button.removeAttr('disabled')
+        } else{
+            button.stop(true).delay(200).animate({ opacity: '0.75', }, 600)
+            button.attr('disabled', true)
+        }
     })
-    $('#text').on('keyup', (function(){
-        let seed = $(this).val();
-        let source = `https://avatars.dicebear.com/4.6/api/micah/${seed}.svg?mouth=smile&background=%23000051`;
-        $('#random_avatar').attr('src', source)
-    }))()
 </script>
 @endsection
