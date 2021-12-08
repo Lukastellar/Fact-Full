@@ -3,15 +3,26 @@
 @section('content')
     <!-- TODO: 1) Stranicu moze da vidi svako, ali samo ulogovani korisnici mogu da ih dodaju -->
     <!-- Page Content -->
-    <div class="">
-        <div class="flex flex-col justify-between items-center w-screen py-10 w-screen h-screen" style="background-color: #222222f0">
+
+        <div class="flex flex-col justify-between items-center w-screen py-10 w-screen h-screen" style="background-color: #f9f9f9f0">
+            {{Auth::user()}}
+            {{--{{ $user->name }}
+            <br>
+            {{ $user->email }}--}}
             <div id="daily-fact" class="h-52 w-2/4 text-center">
-                <h1 class="font-bold text-2xl mb-4">Cinjenica dana!</h1>
+                <h1 class="font-bold text-2xl mb-4"> Cinjenica dana!
+                    <span style="color: #555555">
+                        <i class="fas fa-journal-whills"></i>
+                    </span>
+                </h1>
                 <p class="px-10 italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consectetur consequatur enim facilis
                     molestiae natus nemo officiis sapiente, vitae voluptate.</p>
             </div>
             <div id="monthly-facts" class="mx-28 w-screen">
-                <h1 class="font-bold text-xl ml-12 mb-8"><span class="text-red-400 capitalize font-bolder text-2xl">Top</span> cinjenice nedelje</h1>
+                <h1 class="font-bold text-xl ml-12 mb-8">
+                    <span class="text-red-400 capitalize font-bolder text-2xl">Top</span>
+                    cinjenice nedelje
+                </h1>
                 <div class="splide">
                     <div class="splide__track">
                         <ul class="splide__list">
@@ -94,30 +105,27 @@
                 </div>
             </div>
             <div id="contact" class="flex flex-row justify-center items-center w-full h-42 flex-grow">
-                <div class="contact-wrapper h-full w-full px-24 border-2 border-red border-solid flex-grow">
-                    <h1 class="text-white pt-10 pb-12 text-lg font-bold ">
-                        <span class="font-bold text-yellow-200">Hejj</span>, podeli i ti svoju tajnu činjenicu sa ostalima!
-                    </h1>
-                    <div class=" flex gap-x-4 mb-4">
-                        <div class="flex-grow">
-                            <p class="mb-2 font-semibold text-white">E-mail:</p>
-                            <input class="w-full" type="email">
+                <div id="contact-wrapper" class="flex justify-center items-center h-full px-24">
+                    <form id="contact-inner" class="w-full">
+                        <h1 class="text-lg font-bold pb-12">
+                            <span class="font-bold text-xl">Hejj</span>, podeli i ti svoju tajnu činjenicu sa ostalima!
+                        </h1>
+                        <div class="flex gap-x-4 mb-4">
+                            <div class="flex-grow">
+                                <input class="w-full" type="email" placeholder="E-mail">
+                            </div>
+                            <div class="flex-grow">
+                                <input class="w-full" type="text" placeholder="Naslov cinjenice">
+                            </div>
                         </div>
-                        <div class="flex-grow">
-                            <p class="mb-2 font-semibold text-white">Naslov činjenice:</p>
-                            <input class="w-full" type="text">
+                        <div class="flex flex-col justify-center">
+                            <textarea class="w-full h-40" placeholder="Cinjenica:"></textarea>
                         </div>
-                    </div>
-                    <div class="flex justify-center h-auto">
-                        <textarea class="w-full h-40"></textarea>
-                    </div>
-                </div>
-                <div class="h-full w-full border-2 border-blue border-solid flex-grow">
-                    {{-- Content --}}
+                        <button class="contact-btn mx-auto mt-4" type="submit">Pošalji</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
 
     <script>
 

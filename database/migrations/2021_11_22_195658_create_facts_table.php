@@ -16,8 +16,9 @@ class CreateFactsTable extends Migration
         Schema::create('facts', function (Blueprint $table) {
             $table->id();
             $table->text('fact');
+            $table->string('title');
             $table->text('description')->nullable();
-            $table->integer('face_category_id')->nullable();
+            $table->integer('fact_category_id')->nullable();
             $table->integer('fact_status_id')->default(1);
             $table->timestamps();
         });

@@ -22,6 +22,15 @@
                 padding: 4px 13px 3px 13px;
                 font-size: 14px;
             }
+            .login-wrapper > div {
+                width: 200px;
+            }
+            .error-msg{
+                margin-top: 0.25rem;
+                font-weight: 600;
+                font-size: 14px;
+                text-align: center;
+            }
         </style>
     </head>
     <body>

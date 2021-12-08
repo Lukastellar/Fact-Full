@@ -1,7 +1,7 @@
 @extends('layouts.welcome')
 
 @section('content')
-<form action="{{route('login.post')}}" method="POST">
+<form action="{{route('login')}}" method="POST">
     @csrf
     <div class="w-screen h-screen flex flex-col justify-center items-center gap-y-6 bg-yellow-100">
         <div class="flex flex-row gap-x-6">
@@ -14,7 +14,8 @@
                 <input id="password" class="block border-2 border-gray-500 rounded outline-none" type="password" name="password">
             </div>
         </div>
-        <button id="submit" class="px-5 py-2 uppercase font-bold bg-gray-800 text-white text-sm opacity-75 rounded" type="submit" disabled>Submit</button>
+        <input class="form-check-input" type="checkbox" name="remember" id="remember">
+        <button id="submit" class="px-5 py-2 uppercase font-bold bg-gray-800 text-white text-sm opacity-75 hover:opacity-100 transition-opacity duration-500 rounded" type="submit" disabled>Submit</button>
     </div>
 </form>
 <script>
@@ -29,6 +30,6 @@
             button.stop(true).delay(200).animate({ opacity: '0.75', }, 600)
             button.attr('disabled', true)
         }
-    })
+    });
 </script>
 @endsection

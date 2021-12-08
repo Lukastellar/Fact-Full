@@ -30,7 +30,7 @@
             box-sizing: border-box;
         }
         #navbar{
-            left: -16rem;
+            left: -16rem; /* -16 */
             transition: left 500ms;
             z-index: 998;
         }
@@ -67,6 +67,28 @@
             transform: translateY(-50%);
             border-radius: 0 50% 50% 0;
             transition: color 300ms;
+        }
+        #login-register > button {
+            background: transparent;
+            border-width: 2px;
+            border-style: solid;
+            color: #555;
+            font-weight: 500;
+            padding: 4px 10px;
+            transition: all 500ms;
+        }
+        #login-register > button:first-child{
+            border-color: #00b200;
+            color: #008a00;
+        }
+        #login-register > button:last-child{
+            border-color: #0011c7;
+            color: #000b8a;
+        }
+        #login-register > button:hover {
+            border-color: #383838;
+            background-color: #383838;
+            color: white;
         }
         #nav:hover #opener{
               color: white;
@@ -161,28 +183,52 @@
             color: #dddddd;
         }
         #daily-fact > h1 {
-            color: whitesmoke;
+            color: #49a2ff;
         }
         #daily-fact > p {
-            color: #e1e1e1;
+            color: #2a2a2a;
         }
         #daily-fact > p:first-letter{
             font-size: 23px;
         }
         #monthly-facts > h1{
-            color: whitesmoke;
+            color: #444444;
         }
         .slider:hover{ cursor: grab }
         .slider:active{ cursor: grabbing }
         .fact-item:hover{ cursor: pointer }
-        .contact-wrapper input,
-        .contact-wrapper textarea {
-            background: #f6f6f6;
+
+        #contact-wrapper {
+            width: 45%;
+        }
+        #contact-wrapper h1{
+            color: #444444;
+        }
+        #contact-wrapper h1 > span{
+            color: hsl(266deg 91% 71%);
+        }
+        #contact-wrapper input,
+        #contact-wrapper textarea {
+            background: rgba(227, 227, 227, 0.78);
             color: #494949;
             padding: 5px 15px;
             font-weight: 500;
             font-size: 15px;
             border-radius: 10px;
+            max-height: 230px;
+        }
+        .contact-btn{
+            display: block;
+            background-color: #3434ff;
+            color: white;
+            font-weight: 600;
+            padding: 6px 18px;
+            border-radius: 5px;
+            opacity: 0.8;
+            transition: opacity 400ms;
+        }
+        .contact-btn:hover{
+            opacity: 1;
         }
     </style>
     <body>
@@ -207,7 +253,6 @@
                                     <a href="">
                                         <span class="nav-menu-link-name"> Submenu 1 </span>
                                     </a>
-
                                 </li>
                                 <li class="nav-menu-item">
                                     <a href="">
@@ -223,7 +268,7 @@
                         </li>
                         <li class="nav-menu-item">
                             <a class="nav-menu-link" href="#">
-                                <i class="fas fa-bacteria"></i>
+                                <i class="fas fa-kiss"></i>
                                 <span class="nav-menu-link-name">Dva</span>
                                 <i class="fas fa-angle-left"></i>
                             </a>
@@ -244,7 +289,7 @@
                         </li>
                         <li class="nav-menu-item">
                             <a class="nav-menu-link" href="#">
-                                <i class="fas fa-radiation"></i>
+                                <i class="fas fa-dog"></i>
                                 <span class="nav-menu-link-name">Pet</span>
                                 <i class="fas fa-angle-left"></i>
                             </a>
@@ -258,8 +303,24 @@
             <i id="opener" class="fas fa-2x fa-caret-right"></i>
         </div>
     </nav>
-        <div id="overlay"></div>
+    <div id="login-register" class="absolute top-0 right-0 p-4">
+    @if(Auth::check())
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                @csrf
+            </form>
+            <button class="rounded" type="submit"><a href="{{route('logout')}}" onclick="
+            event.preventDefault();
+            document.getElementById('logout-form').submit();">Izloguj se</a></button>
+        @else
+            <button class="rounded" type="button"><a href="{{route('login')}}">Uloguj se</a></button>
+            <button class="rounded" type="button"><a href="{{route('register')}}">Registruj se</a></button>
+    @endif
+    </div>
+
+    <div id="overlay"></div>
+
     @yield('content')
+
     </body>
 
     <script>

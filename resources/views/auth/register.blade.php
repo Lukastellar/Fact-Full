@@ -1,29 +1,40 @@
 @extends('layouts.welcome')
 
 @section('content')
-<form action="{{route('register.post')}}" method="POST">
+<form action="{{route('register')}}" method="POST">
     @csrf
     <div class="flex flex-row overflow-hidden">
         <!-- Section 1 -->
        <div id="s_1" class="flex-none w-screen h-screen flex flex-col justify-center items-center gap-y-6 bg-green-100">
-            <div class="flex flex-row gap-x-6">
+            <div class="login-wrapper flex flex-row gap-x-6">
                 <div>
                     <h3 class="text-center mb-2 font-bold">Username</h3>
-                    <input class="block border-2 border-gray-500 rounded outline-none" type="text" name="name">
+                    <input class="block outline-none border-none rounded outline-none {{ isset($err_true) ?? 'bg-red-100' }}" type="text" name="name" value="">
+                    @error('name', 'login') <p class="error-msg"> {{'*'.$message}} </p> @enderror
                 </div>
                 <div>
                     <h3 class="text-center mb-2 font-bold">E-mail</h3>
-                    <input class="block border-2 border-gray-500 rounded outline-none" type="email" name="email">
+                    <input class="block outline-none border-none rounded outline-none {{ isset($err_true) ?? 'bg-red-100' }}" type="email" name="email">
+                    @error('email', 'login') <p class="error-msg">{{'*'.$message}} </p> @enderror
                 </div>
                 <div>
                     <h3 class="text-center mb-2 font-bold">Password</h3>
-                    <input class="block border-2 border-gray-500 rounded outline-none" type="password" name="password">
+                    <input id="password" class="block outline-none border-none rounded outline-none {{ isset($err_true) ?? 'bg-red-100' }}" type="password" name="password">
+                    @error('password', 'login') <p class="error-msg">{{'*'.$message}} </p> @enderror
+                </div>
+                <div>
+                    <h3 class="text-center mb-2 font-bold">Confirm passowrd</h3>
+                    <input id="password_confirmation" class="block outline-none border-none rounded outline-none {{ isset($err_true) ?? 'bg-red-100' }}" type="password" name="password_confirmation">
+                    @error('password_confirmation', 'login') <p class="error-msg">{{'*'.$message}} </p> @enderror
+                    <div class="w-full relative">
+                        <p id="message" class="absolute text-center w-full font-semibold mt-1"></p>
+                    </div>
                 </div>
             </div>
-            <button id="forward" class="px-5 py-2 uppercase font-bold bg-green-600 text-white text-sm rounded" type="button">Next</button>
+            <button type="submit" id="forward" class="px-5 py-2 uppercase font-bold bg-green-600 text-white text-sm rounded">Next</button>
         </div>
         <!-- Section 2 -->
-        <div id="s_2" class="flex-none inline-flex w-screen h-screen flex flex-col justify-center items-center gap-y-6 bg-yellow-100">
+       {{-- <div id="s_2" class="flex-none inline-flex w-screen h-screen flex flex-col justify-center items-center gap-y-6 bg-yellow-100">
             <div class="flex flex-col gap-y-6 justify-center items-center">
                 <h1 class="font-bold text-xl text-gray-800">Customize your profile picture: </h1>
                 <input id="seed" class="w-48 py-1.5 px-2 pl-3 rounded outline-none" type="text" placeholder="Type your favourite name !">
@@ -47,10 +58,25 @@
                     Submit
                 </button>
             </div>
-        </div>
+        </div>--}}
     </div>
 </form>
 <script>
+    $('#password, #password_confirmation').on('keyup', function () {
+
+        let password = $('#password').val(),
+            conf_password = $('#password_confirmation').val(),
+            message = $('#message');
+
+        if( (password == 0 && conf_password == 0) || conf_password == 0) {
+            message.empty();
+        } else if ( password === conf_password ) {
+            message.html('Matching').css('color', '#00a705');
+
+        } else
+            message.html('Not Matching').css('color', '#c12222');
+    });
+
     $('#forward').on('click', function(){
         $('#s_2').animate({
             marginLeft: "-100%"
