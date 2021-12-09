@@ -17,13 +17,27 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
-            input {
+            input[type='text'],
+            input[type='password'] {
+                outline: none;
+                border: none;
+            }
+            input:-webkit-autofill,
+            input:-webkit-autofill:hover,
+            input:-webkit-autofill:focus,
+            input:-webkit-autofill:active,
+            input:-webkit-autofill::selection,
+            input:-webkit-autofill::before,
+            input:-webkit-autofill::after{
+                -webkit-box-shadow: 0 0 0 30px white inset !important;
+            }
+            .credentials > div {
+                width: 200px;
+            }
+            .credentials input {
                 width: 200px;
                 padding: 4px 13px 3px 13px;
                 font-size: 14px;
-            }
-            .login-wrapper > div {
-                width: 200px;
             }
             .error-msg{
                 margin-top: 0.25rem;

@@ -19,14 +19,19 @@ use App\Http\Controllers\Auth\RegisterController;
 */
 
 
-Route::get('login', [LoginController::class, 'login'])->name('login');
+Route::get('login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'login_post'])->name('login.post');
-Route::get('register', [RegisterController::class, 'register'])->name('register');
+Route::get('register', [RegisterController::class, 'register'])->name('register')->middleware('guest');
 Route::post('register', [RegisterController::class, 'register_post'])->name('register.post');
+
+Route::post('logout', function() {
+    Auth::logout();
+    return redirect()->route('login');
+})->name('logout');
 
 Route::get('/', function(){
     return view('pages.dashboard', [
-        'user' => Auth::user(),
+        'user' => Auth::user()
     ]);
 })->name('dashboard');
 

@@ -5,27 +5,27 @@
     @csrf
     <div class="flex flex-row overflow-hidden">
         <!-- Section 1 -->
-       <div id="s_1" class="flex-none w-screen h-screen flex flex-col justify-center items-center gap-y-6 bg-green-100">
-            <div class="login-wrapper flex flex-row gap-x-6">
+       <div id="s_1" class="flex-none w-screen h-screen flex flex-col justify-center items-center gap-y-6 bg-green-200">
+            <div class="credentials flex flex-row gap-x-6">
                 <div>
                     <h3 class="text-center mb-2 font-bold">Username</h3>
-                    <input class="block outline-none border-none rounded outline-none {{ isset($err_true) ?? 'bg-red-100' }}" type="text" name="name" value="">
-                    @error('name', 'login') <p class="error-msg"> {{'*'.$message}} </p> @enderror
+                    <input class="block rounded" type="text" name="name" value="">
+                    @error('name') <p class="error-msg"> {{'*'.$message}} </p> @enderror
                 </div>
                 <div>
                     <h3 class="text-center mb-2 font-bold">E-mail</h3>
-                    <input class="block outline-none border-none rounded outline-none {{ isset($err_true) ?? 'bg-red-100' }}" type="email" name="email">
-                    @error('email', 'login') <p class="error-msg">{{'*'.$message}} </p> @enderror
+                    <input class="block rounded" type="email" name="email">
+                    @error('email') <p class="error-msg">{{'*'.$message}} </p> @enderror
                 </div>
                 <div>
                     <h3 class="text-center mb-2 font-bold">Password</h3>
-                    <input id="password" class="block outline-none border-none rounded outline-none {{ isset($err_true) ?? 'bg-red-100' }}" type="password" name="password">
-                    @error('password', 'login') <p class="error-msg">{{'*'.$message}} </p> @enderror
+                    <input id="password" class="block rounded" type="password" name="password">
+                    @error('password') <p class="error-msg">{{'*'.$message}} </p> @enderror
                 </div>
                 <div>
                     <h3 class="text-center mb-2 font-bold">Confirm passowrd</h3>
-                    <input id="password_confirmation" class="block outline-none border-none rounded outline-none {{ isset($err_true) ?? 'bg-red-100' }}" type="password" name="password_confirmation">
-                    @error('password_confirmation', 'login') <p class="error-msg">{{'*'.$message}} </p> @enderror
+                    <input id="password_confirmation" class="block rounded" type="password" name="password_confirmation">
+                    @error('password_confirmation') <p class="error-msg">{{'*'.$message}} </p> @enderror
                     <div class="w-full relative">
                         <p id="message" class="absolute text-center w-full font-semibold mt-1"></p>
                     </div>

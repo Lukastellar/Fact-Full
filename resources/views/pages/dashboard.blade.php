@@ -9,6 +9,7 @@
             {{--{{ $user->name }}
             <br>
             {{ $user->email }}--}}
+
             <div id="daily-fact" class="h-52 w-2/4 text-center">
                 <h1 class="font-bold text-2xl mb-4"> Cinjenica dana!
                     <span style="color: #555555">
@@ -18,6 +19,9 @@
                 <p class="px-10 italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consectetur consequatur enim facilis
                     molestiae natus nemo officiis sapiente, vitae voluptate.</p>
             </div>
+            @if( Session::has('greetings'))
+                <p> {{ Session::get('greetings') }}</p>
+            @endif
             <div id="monthly-facts" class="mx-28 w-screen">
                 <h1 class="font-bold text-xl ml-12 mb-8">
                     <span class="text-red-400 capitalize font-bolder text-2xl">Top</span>
@@ -105,7 +109,7 @@
                 </div>
             </div>
             <div id="contact" class="flex flex-row justify-center items-center w-full h-42 flex-grow">
-                <div id="contact-wrapper" class="flex justify-center items-center h-full px-24">
+                <div id="contact-wrapper" class="flex justify-center items-center h-full mt-10 px-24">
                     <form id="contact-inner" class="w-full">
                         <h1 class="text-lg font-bold pb-12">
                             <span class="font-bold text-xl">Hejj</span>, podeli i ti svoju tajnu činjenicu sa ostalima!

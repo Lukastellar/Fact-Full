@@ -15,29 +15,20 @@ class RegisterController extends Controller
     }
 
     public function register_post(Request $request){
-        $user = User::where('email', $request->email)->first();
 
         $validator = Validator::make($request->input(), [
-            'name' => 'required|unique:users,name',
-            'email' => 'required|email:rfc|unique:users,email',
-            'password' => 'required|confirmed|string',
+            'name' => 'required|unique:users,name|max:36',
+            'email' => 'required|email:rfc|unique:users,email|max:255',
+            'password' => 'required|string|confirmed',
             'password_confirmation' => 'required'
+        ])->validate();
+
+        User::create([
+            'name' => $validator['name'],
+            'email' => $validator['email'],
+            'password' => Hash::make($validator['password']),
         ]);
 
-        if($validator->fails()){
-            return back()
-                ->with(['err_true' => true])
-                ->withErrors($validator, 'login');
-        }
-        if( !$user ){
-            User::create([
-                'name' => $validator['name'],
-                'email' => $validator['email'],
-                'password' => Hash::make($validator['password']),
-            ]);
-            return 'Logged in!';
-        }
-        return 'User with ' . $request->email . ' already exists';
-
+        return redirect()->route('dashboard');
     }
 }

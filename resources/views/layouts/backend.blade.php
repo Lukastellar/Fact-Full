@@ -74,8 +74,11 @@
             border-style: solid;
             color: #555;
             font-weight: 500;
-            padding: 4px 10px;
             transition: all 500ms;
+        }
+        #login-register > button > a {
+            display: block;
+            padding: 4px 10px;
         }
         #login-register > button:first-child{
             border-color: #00b200;
@@ -310,7 +313,8 @@
             </form>
             <button class="rounded" type="submit"><a href="{{route('logout')}}" onclick="
             event.preventDefault();
-            document.getElementById('logout-form').submit();">Izloguj se</a></button>
+            document.getElementById('logout-form').submit();
+            ">Izloguj se</a></button>
         @else
             <button class="rounded" type="button"><a href="{{route('login')}}">Uloguj se</a></button>
             <button class="rounded" type="button"><a href="{{route('register')}}">Registruj se</a></button>

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -13,16 +13,19 @@ class LoginController extends Controller
         return view('auth.login');
     }
     public function login_post(Request $request){
-        $body = $request->validate([
-            'name' => 'required|string',
+
+        $credentials = $request->only('name', 'password');
+
+        $validator = Validator::make($credentials, [
+            'name' => 'required|string|exists:users,name|max:36',
             'password' => 'required|string',
-        ]);
+        ])->validate();
 
-        if(!Auth::attempt($body)){
-            return 'Try again, maybe you mistyped something! :/';
+        if( Auth::attempt($credentials, $request->get('remember')) ){
+            return redirect()->intended( route('dashboard') )->with('greetings', 'Hey glad to see you back! :)');
         }
-        return 'Hey, you logged in! Enjoy :)';
 
+        return 'Something went wrong, oops!';
     }
 
 }
