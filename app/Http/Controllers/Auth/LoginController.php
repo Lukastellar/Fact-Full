@@ -12,10 +12,9 @@ class LoginController extends Controller
     public function login(){
         return view('auth.login');
     }
+
     public function login_post(Request $request){
-
         $credentials = $request->only('name', 'password');
-
         $validator = Validator::make($credentials, [
             'name' => 'required|string|exists:users,name|max:36',
             'password' => 'required|string',
@@ -28,4 +27,8 @@ class LoginController extends Controller
         return 'Something went wrong, oops!';
     }
 
+    public function logout() {
+        Auth::logout();
+        return redirect()->route('login');
+    }
 }

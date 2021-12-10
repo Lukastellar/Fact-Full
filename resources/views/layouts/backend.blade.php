@@ -29,6 +29,10 @@
             outline: none;
             box-sizing: border-box;
         }
+        body {
+            overflow-x: hidden;
+        }
+
         #navbar{
             left: -16rem; /* -16 */
             transition: left 500ms;
@@ -68,30 +72,44 @@
             border-radius: 0 50% 50% 0;
             transition: color 300ms;
         }
-        #login-register > button {
+        .btn-redirect {
             background: transparent;
+            max-width: 120px;
             border-width: 2px;
             border-style: solid;
             color: #555;
             font-weight: 500;
             transition: all 500ms;
         }
-        #login-register > button > a {
+        .btn-redirect > a {
             display: block;
             padding: 4px 10px;
         }
-        #login-register > button:first-child{
+        .btn-redirect.logout{
+            border-color: #b20000;
+            color: #8a0000;
+        }
+        .btn-redirect.login{
             border-color: #00b200;
             color: #008a00;
         }
-        #login-register > button:last-child{
+        .btn-redirect.register{
             border-color: #0011c7;
             color: #000b8a;
         }
-        #login-register > button:hover {
+        .btn-redirect:hover {
             border-color: #383838;
             background-color: #383838;
             color: white;
+        }
+        .btn-redirect.btn-nav {
+            border-color: #5b5bfe;
+            color: white;
+        }
+        .btn-redirect.btn-nav:hover {
+            background-color: white;
+            border-color: white;
+            color: black;
         }
         #nav:hover #opener{
               color: white;
@@ -172,11 +190,20 @@
         .fact-item > h2 {
             color: rgba(52, 52, 52, 0.85);
         }
-        .fact-item > .fact-text-wrapper {
+        .fact-text-wrapper {
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
+        }
+        .item {
+            min-width: 150px;
+            max-width: 300px;
+            height: fit-content;
+            overflow-wrap: break-word;
+        }
+        .item {
+            cursor: pointer;
         }
         #daily-fact{
             display: flex;
@@ -220,6 +247,15 @@
             border-radius: 10px;
             max-height: 230px;
         }
+        #category {
+            width: 100%;
+            background: rgba(227, 227, 227, 0.78);
+            color: #a5a5a5;
+            padding: 3px 11px;
+            font-weight: 500;
+            font-size: 15px;
+            border-radius: 10px;
+        }
         .contact-btn{
             display: block;
             background-color: #3434ff;
@@ -233,17 +269,32 @@
         .contact-btn:hover{
             opacity: 1;
         }
+        .search {
+
+        }
     </style>
     <body>
     <nav id="navbar" class="fixed h-screen left-0 top-0">
         <div id="nav" class="w-64 h-screen">
             <div class="absolute flex flex-col w-full pb-5" style="height: 100%;">
-                <div class="px-5 py-10 flex items-center">
-                    <span class="bg-red-200 w-20 h-20"></span>
-                    <span id="profile-name" class="flex-1 text-center font-semibold"> Luka Stajić </span>
-                </div>
-                <div>
+                @if(Auth::check())
+                    <div class="px-5 pt-10 flex items-center">
+                        <span class="bg-red-200 w-20 h-20"></span>
+                        <span id="profile-name" class="flex-1 text-center font-semibold"> Luka Stajić </span>
+                    </div>
+                @else
+                    <div class="px-5 pt-10 flex flex-col justify-center items-center">
+                        <h1 class="text-md font-bold pb-3 text-center text-white"> Priduži se i ti nama :) </h1>
+                        <button class="btn-redirect btn-nav rounded :hover" type="button"><a href="{{route('register')}}">Registruj se</a></button>
+                    </div>
+                @endif
+                <div class="pt-10">
                     <ul class="nav-menu">
+                        <li class="nav-menu-item">
+                            <a href="{{route('dashboard')}}">
+                                <span class="nav-menu-link-name"> Glavni meni </span>
+                            </a>
+                        </li>
                         <li class="nav-menu-header">Naslov</li>
                         <li class="nav-menu-item">
                             <a class="nav-menu-link" href="#">
@@ -253,7 +304,7 @@
                             </a>
                             <ul class="nav-menu-submenu">
                                 <li class="nav-menu-item">
-                                    <a href="">
+                                    <a href="{{route('fact.show', ['health'])}}">
                                         <span class="nav-menu-link-name"> Submenu 1 </span>
                                     </a>
                                 </li>
@@ -311,13 +362,13 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                 @csrf
             </form>
-            <button class="rounded" type="submit"><a href="{{route('logout')}}" onclick="
+            <button class="btn-redirect logout rounded" type="submit"><a href="{{route('logout')}}" onclick="
             event.preventDefault();
             document.getElementById('logout-form').submit();
-            ">Izloguj se</a></button>
+            ">Odjavi se</a></button>
         @else
-            <button class="rounded" type="button"><a href="{{route('login')}}">Uloguj se</a></button>
-            <button class="rounded" type="button"><a href="{{route('register')}}">Registruj se</a></button>
+            <button class="btn-redirect login rounded" type="button"><a href="{{route('login')}}">Prijavi se</a></button>
+            <button class="btn-redirect register rounded" type="button"><a href="{{route('register')}}">Registruj se</a></button>
     @endif
     </div>
 

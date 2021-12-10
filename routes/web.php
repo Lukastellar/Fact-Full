@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FactController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -18,22 +19,22 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-
 Route::get('login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'login_post'])->name('login.post');
 Route::get('register', [RegisterController::class, 'register'])->name('register')->middleware('guest');
 Route::post('register', [RegisterController::class, 'register_post'])->name('register.post');
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::post('logout', function() {
-    Auth::logout();
-    return redirect()->route('login');
-})->name('logout');
+Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
+Route::resource('fact', FactController::class, [
+    'names' => [
+        'index' => 'fact.index',
+        'store' => 'fact.store',
+        'show' => 'fact.show',
+    ]
+]);
 
-Route::get('/', function(){
-    return view('pages.dashboard', [
-        'user' => Auth::user()
-    ]);
-})->name('dashboard');
+// Route::get('/fact/{category}', [FactController::class, 'index'])->name('fact.index');
 
 Route::group(['middleware'=>'auth'], function(){
 

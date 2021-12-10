@@ -4,8 +4,9 @@
     <!-- TODO: 1) Stranicu moze da vidi svako, ali samo ulogovani korisnici mogu da ih dodaju -->
     <!-- Page Content -->
 
-        <div class="flex flex-col justify-between items-center w-screen py-10 w-screen h-screen" style="background-color: #f9f9f9f0">
+        <div class="flex flex-col justify-between items-center w-screen py-10 w-screen h-screen overflow-x-hidden" style="background-color: #f9f9f9f0">
             {{Auth::user()}}
+            {{ Auth::guest() ? 'guest' : 'NO guest' }}
             {{--{{ $user->name }}
             <br>
             {{ $user->email }}--}}
@@ -19,8 +20,8 @@
                 <p class="px-10 italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consectetur consequatur enim facilis
                     molestiae natus nemo officiis sapiente, vitae voluptate.</p>
             </div>
-            @if( Session::has('greetings'))
-                <p> {{ Session::get('greetings') }}</p>
+            @if( session('greetings'))
+                <p> {{ session('greetings') }}</p>
             @endif
             <div id="monthly-facts" class="mx-28 w-screen">
                 <h1 class="font-bold text-xl ml-12 mb-8">
@@ -109,35 +110,72 @@
                 </div>
             </div>
             <div id="contact" class="flex flex-row justify-center items-center w-full h-42 flex-grow">
-                <div id="contact-wrapper" class="flex justify-center items-center h-full mt-10 px-24">
-                    <form id="contact-inner" class="w-full">
+                <div id="contact-wrapper" class="relative flex justify-center items-center h-full mt-10 px-24">
+                    <form action="{{route('fact.store')}}" method="POST" id="contact-inner" class="w-full">
+                        @csrf
                         <h1 class="text-lg font-bold pb-12">
                             <span class="font-bold text-xl">Hejj</span>, podeli i ti svoju tajnu činjenicu sa ostalima!
                         </h1>
-                        <div class="flex gap-x-4 mb-4">
+                        @if(Auth::check())
+                        <div class="flex gap-x-4 mb-2">
                             <div class="flex-grow">
-                                <input class="w-full" type="email" placeholder="E-mail">
+                                <input class="w-full" type="text" placeholder="Naslov cinjenice" name="title" autocomplete="off">
                             </div>
-                            <div class="flex-grow">
-                                <input class="w-full" type="text" placeholder="Naslov cinjenice">
-                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <select id="category" name="category">
+                                <option selected>Kategorija:</option>
+                                <option value="1">Zdravlje</option>
+                                <option value="2">Nauka</option>
+                                <option value="3">Opšte</option>
+                            </select>
                         </div>
                         <div class="flex flex-col justify-center">
-                            <textarea class="w-full h-40" placeholder="Cinjenica:"></textarea>
+                            <textarea class="w-full h-40" placeholder="Cinjenica:" name="description" autocomplete="off"></textarea>
                         </div>
+                            @else
+                            <div class="flex gap-x-4 mb-2">
+                                <div class="flex-grow">
+                                    <input class="w-full" type="email" placeholder="E-mail" name="email" autocomplete="off">
+                                </div>
+                                <div class="flex-grow">
+                                    <input class="w-full" type="text" placeholder="Naslov cinjenice" name="title" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <select id="category" name="category">
+                                    <option selected>Kategorija:</option>
+                                    <option value="1">Zdravlje</option>
+                                    <option value="2">Nauka</option>
+                                    <option value="3">Opšte</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <textarea class="w-full h-40" placeholder="Cinjenica:" name="fact" autocomplete="off"></textarea>
+                            </div>
+                        @endif
                         <button class="contact-btn mx-auto mt-4" type="submit">Pošalji</button>
                     </form>
+                    {{--@if(Auth::guest())
+                    <div class="flex flex-col items-center justify-center absolute w-full h-full">
+                        <p class="font-semibold text-lg text-center mb-10">Probaj da se ulogujes! Jedva čekamo da podeliš svoje znanje sa nama :)</p>
+                        <div>
+                            <button class="btn-redirect login rounded" type="button"><a href="{{route('login')}}">Uloguj se</a></button>
+                            <button class="btn-redirect register rounded" type="button"><a href="{{route('register')}}">Registruj se</a></button>
+                        </div>
+                    </div>
+                    @endif--}}
                 </div>
             </div>
         </div>
 
     <script>
-
+        // Change items color
         $('.fact-item').each((index, element) => {
             let random = Math.floor( Math.random() * 360 )
-            element.style.backgroundColor = `hsl( ${random + 'deg'} 100% 95%)`
+            element.style.backgroundColor = `hsl( ${random + 'deg'} 100% 92%)`
         })
-
+        // Slider
         let splide = new Splide( '.splide', {
             perPage: 4,
             width: '100%',

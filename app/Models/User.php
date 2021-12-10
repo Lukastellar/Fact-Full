@@ -41,4 +41,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function votedPosts(){
+        return $this->belongsToMany(Fact::class, 'likes')->withPivot('is_like')->withTimestamps();
+    }
 }

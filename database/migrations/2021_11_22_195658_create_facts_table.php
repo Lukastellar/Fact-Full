@@ -15,11 +15,12 @@ class CreateFactsTable extends Migration
     {
         Schema::create('facts', function (Blueprint $table) {
             $table->id();
-            $table->text('fact');
             $table->string('title');
-            $table->text('description')->nullable();
-            $table->integer('fact_category_id')->nullable();
-            $table->integer('fact_status_id')->default(1);
+            $table->text('description');
+            $table->integer('category_id')->unsigned();
+            $table->integer('status_id')->unsigned()->default(1);
+            $table->integer('user_id')->nullable()->unsigned();
+            $table->integer('guest_id')->nullable();
             $table->timestamps();
         });
     }

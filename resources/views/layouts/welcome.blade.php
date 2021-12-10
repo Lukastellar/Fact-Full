@@ -17,8 +17,7 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
-            input[type='text'],
-            input[type='password'] {
+            input {
                 outline: none;
                 border: none;
             }
