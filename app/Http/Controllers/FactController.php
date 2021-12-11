@@ -68,15 +68,8 @@ class FactController extends Controller
      *
      * @param  \App\Models\Fact  $facts
      */
-    public function show(Request $request, Fact $facts)
+    public function show(Fact $facts)
     {
-        if($request->ajax()){
-            $data = Fact::where('title', 'like', '%'.$request->search.'%')
-                ->orWhere('fact', 'like', '%'.$request->search.'%')->get();
-
-            return $data->split(3);
-        }
-
         $parameter = Route::current()->parameter('fact');
         $facts = $facts->all();
         $facts_row = $facts->split(3);

@@ -33,6 +33,13 @@
             overflow-x: hidden;
         }
 
+        #fact-nav {
+            background: rgba(255, 0, 0, 0.23);
+            width: 16rem;
+            z-index: 900;
+            right: 0;
+        }
+
         #navbar{
             left: -16rem; /* -16 */
             transition: left 500ms;
@@ -197,14 +204,63 @@
             overflow: hidden;
         }
         .item {
+            padding: 30px 30px 0 30px;
+            height: fit-content;
             min-width: 150px;
             max-width: 300px;
-            height: fit-content;
             overflow-wrap: break-word;
+            overflow: hidden;
+            z-index: 20;
         }
-        .item {
-            cursor: pointer;
+        .item-menu {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 20px 0;
+            position: absolute;
+            width: 30px;
+            height: 100%;
+            top: 0;
+            right: -30px;
+            z-index: -1;
+            border-radius: 15px 0 0 15px;
+            background: #262626;
+            transition: right 300ms;
         }
+        .item-menu > a {
+            color: #f5f5f5;
+        }
+        .item-menu > .item-arrow {
+            position: absolute;
+            padding: 200% 50% 200% 5px;
+            left: -17px;
+            top: 0;
+            height: 100%;
+        }
+        .item-menu > .item-arrow > i {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 300ms;
+        }
+        .item-menu:hover {
+            right: 0;
+        }
+        .item-menu:hover > .item-arrow > i{
+            transform: translateY(-50%) rotateZ(180deg);
+        }
+        .item-text {
+            z-index: -2;
+        }
+        .item > .item-votes {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 10px 0;
+            font-weight: 500;
+        }
+
         #daily-fact{
             display: flex;
             flex-direction: column;

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\APIController;
 use App\Http\Controllers\FactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/api/{search?}', [APIController::class, 'ajax'])->name('facts.api');
 
 Route::get('login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'login_post'])->name('login.post');
@@ -34,7 +36,6 @@ Route::resource('fact', FactController::class, [
     ]
 ]);
 
-// Route::get('/fact/{category}', [FactController::class, 'index'])->name('fact.index');
 
 Route::group(['middleware'=>'auth'], function(){
 
