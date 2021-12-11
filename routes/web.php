@@ -20,6 +20,7 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 Route::get('/api/{search?}', [APIController::class, 'ajax'])->name('facts.api');
+Route::get('/api/like', [APIController::class, 'liker'])->name('facts.liker');
 
 Route::get('login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'login_post'])->name('login.post');

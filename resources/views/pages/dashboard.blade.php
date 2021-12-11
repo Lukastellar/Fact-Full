@@ -12,7 +12,7 @@
             {{ $user->email }}--}}
 
             <div id="daily-fact" class="h-52 w-2/4 text-center">
-                <h1 class="font-bold text-2xl mb-4"> Cinjenica dana!
+                <h1 class="font-bold text-2xl mb-4"> Činjenica dana!
                     <span style="color: #555555">
                         <i class="fas fa-journal-whills"></i>
                     </span>

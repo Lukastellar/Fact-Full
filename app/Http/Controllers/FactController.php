@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Fact;
 use App\Models\Guest;
+use App\Models\Like;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,10 +40,6 @@ class FactController extends Controller
      */
     public function store(Request $request)
     {
-        // Fact liker
-        /*$user = Auth::user(); //or use auth()->user(); if it's the authenticated user
-        $user->votedPosts()->attach($postId);*/
-
         $user_id = Auth::check() ? Auth::user()->id : null;
 
         if( $request->email ){
@@ -70,7 +67,6 @@ class FactController extends Controller
      */
     public function show(Fact $facts)
     {
-        $parameter = Route::current()->parameter('fact');
         $facts = $facts->all();
         $facts_row = $facts->split(3);
 

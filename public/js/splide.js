@@ -3035,4 +3035,3 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   Splide.STATES = STATES;
   return Splide;
 });
-//# sourceMappingURL=splide.js.map

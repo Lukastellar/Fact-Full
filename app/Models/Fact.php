@@ -16,4 +16,7 @@ class Fact extends Model
     public function votedUsers(){
         return $this->belongsToMany(User::class, 'likes')->withPivot('is_like')->withTimestamps();
     }
+    public function likes(){
+        return $this->hasMany(Like::class, 'fact_id','id');
+    }
 }

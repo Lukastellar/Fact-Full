@@ -12,4 +12,8 @@ class Like extends Model
     protected $fillable = [
         'user_id', 'fact_id', 'is_like',
     ];
+
+    public function post(){
+        return $this->belongsTo(Fact::class, 'fact_id');
+    }
 }
