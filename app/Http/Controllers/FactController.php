@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Fact;
 use App\Models\Guest;
 use App\Models\Like;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use function MongoDB\BSON\toJSON;
 
 class FactController extends Controller
 {
@@ -65,12 +64,12 @@ class FactController extends Controller
      *
      * @param  \App\Models\Fact  $facts
      */
-    public function show(Fact $facts)
+    public function show()
     {
-        $facts = $facts->all();
+        $facts = Fact::withCount(['likes as likes', 'dislikes as dislikes'])->get();
         $facts_row = $facts->split(3);
 
-        return view('pages.facts', ['facts_row' => $facts_row]);
+        return view('pages.facts', ['facts_row' => $facts_row, 'user_vote' => Auth::user()->votedPosts()]);
     }
 
     /**

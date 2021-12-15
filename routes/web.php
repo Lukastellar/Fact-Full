@@ -19,8 +19,6 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/api/{search?}', [APIController::class, 'ajax'])->name('facts.api');
-Route::get('/api/like', [APIController::class, 'liker'])->name('facts.liker');
 
 Route::get('login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'login_post'])->name('login.post');
@@ -36,7 +34,9 @@ Route::resource('fact', FactController::class, [
         'show' => 'fact.show',
     ]
 ]);
-
+// Api
+Route::get('/api/like/{data?}', [APIController::class, 'liker'])->name('fact.liker');
+Route::get('/api/{search?}', [APIController::class, 'posts'])->name('fact.api');
 
 Route::group(['middleware'=>'auth'], function(){
 

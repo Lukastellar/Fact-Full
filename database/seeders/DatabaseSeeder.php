@@ -22,16 +22,17 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('testtest'),
         ]);
 
-        $facts = [
-            'title' => Str::random(10),
-            'description' => Str::random(50),
-            'category_id' => 1,
-            'status_id' => 1,
-            'user_id' => null,
-            'guest_id' => null,
-        ];
         for($i = 0; $i < 10; $i++){
-            \App\Models\Fact::create($facts);
+            \App\Models\Fact::create(
+                [
+                    'title' => 'Title: '.$i.Str::random(10),
+                    'description' => Str::random(50),
+                    'category_id' => 1,
+                    'status_id' => 1,
+                    'user_id' => null,
+                    'guest_id' => null,
+                ]
+            );
         }
     }
 }
