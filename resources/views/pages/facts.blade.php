@@ -24,12 +24,12 @@
                                 <p class="text-center"> {{$fact->description}} </p>
                             </div>
                             <div class="item-votes">
-                                <button class="vote-btn like" value="1" onclick="vote(this)">
-                                    <i class="{{ $user_vote->find($fact->id) && $user_vote->find($fact->id)->pivot->is_like == 1 ? 'fas' : 'far'}} fa-thumbs-up"></i>
+                                <button class="vote-btn like" value="1"  onclick="vote(this)">
+                                    <i class="{{ Auth::check() && $user_vote->find($fact->id) && $user_vote->find($fact->id)->pivot->is_like == 1 ? 'fas' : 'far'}} fa-thumbs-up"></i>
                                      <span class="count-liked">{{$fact->likes}}</span>
                                 </button>
                                 <button class="vote-btn dislike" value="0" onclick="vote(this)">
-                                    <i class="{{ $user_vote->find($fact->id) && !$user_vote->find($fact->id)->pivot->is_like? 'fas' : 'far'}} fa-thumbs-down"></i>
+                                    <i class="{{ Auth::check() && $user_vote->find($fact->id) && !$user_vote->find($fact->id)->pivot->is_like? 'fas' : 'far'}} fa-thumbs-down"></i>
                                     <span class="count-disliked">{{$fact->dislikes}}</span>
                                 </button>
                             </div>
@@ -57,6 +57,10 @@
     </div>
     <script>
         colorizeItems();
+
+        @if(!Auth::check())
+            $('.vote-btn').attr('disabled', true);
+        @endif
 
         // Like-Dislike funkcija
         function vote(e) {
@@ -137,6 +141,7 @@
             let html = '';
             console.log(arr, user_vote)
             arr.forEach((fact) => {
+                // TODO: Namesti funkcionalnost i ovde da radi za Like/Dislike
                 html += ` <div class="item flex flex-col relative text-center rounded-2xl">
                             <div class="item-menu">
                                 <div class="item-arrow">
