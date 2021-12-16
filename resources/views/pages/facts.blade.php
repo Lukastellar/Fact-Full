@@ -25,11 +25,11 @@
                             </div>
                             <div class="item-votes">
                                 <button class="vote-btn like" value="1" onclick="vote(this)">
-                                    <i class="{{$user_vote->find($fact->id) ? 'fas' : 'far'}} fa-thumbs-up"></i>
+                                    <i class="{{ $user_vote->find($fact->id) && $user_vote->find($fact->id)->pivot->is_like == 1 ? 'fas' : 'far'}} fa-thumbs-up"></i>
                                      <span class="count-liked">{{$fact->likes}}</span>
                                 </button>
                                 <button class="vote-btn dislike" value="0" onclick="vote(this)">
-                                    <i class="{{!$user_vote->find($fact->id) && $fact->dislikes? 'fas' : 'far'}} fa-thumbs-down"></i>
+                                    <i class="{{ $user_vote->find($fact->id) && !$user_vote->find($fact->id)->pivot->is_like? 'fas' : 'far'}} fa-thumbs-down"></i>
                                     <span class="count-disliked">{{$fact->dislikes}}</span>
                                 </button>
                             </div>
@@ -68,27 +68,30 @@
             let text_val = parseInt(text_elem.text());
             let text_elem_sibling = btn.siblings().children('span');
             let text_val_sibling = parseInt(text_elem_sibling.text());
+            let vote_val = parseInt(btn.val());
 
             // Toggle text +1/-1
             if(icon.hasClass('far') && icon_sibling.hasClass('far')){
                 text_elem.text(++text_val);
-            } else if (icon_sibling.hasClass('fas')){
+            } else if(icon_sibling.hasClass('fas')){
                 text_elem.text(++text_val);
                 text_elem_sibling.text(--text_val_sibling);
-            } else {
+            } else{
                 text_elem.text(--text_val)
+                vote_val = 3;
             }
 
             // Toggles class
-            icon.toggleClass('far fas');
-            icon_sibling.hasClass('fas') ? icon_sibling.toggleClass('far fas') : '';
+
+                icon.toggleClass('far fas');
+                icon_sibling.hasClass('fas') ? icon_sibling.toggleClass('far fas') : '';
 
             $.ajax({
                 url: '/api/like',
                 type: 'GET',
                 data: {
                     'fact_id': fact_id,
-                    'vote_val': btn.val()
+                    'vote_val': vote_val
                 },
             });
         }

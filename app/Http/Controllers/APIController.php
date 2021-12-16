@@ -34,15 +34,21 @@ class APIController extends Controller
     public function liker(Request $request){
         $fact_id = $request->fact_id;
         $vote_val = $request->vote_val;
-        $user = Auth::user();
+        $user_id = Auth::user()->id;
 
         if($request->ajax()){
-            Like::updateOrCreate([
-                'fact_id' => $fact_id,
-                'user_id' => $user->id,
-            ], [
-                'is_like' => $vote_val,
-            ]);
+            if($vote_val === 3){
+                Like::where('fact_id', $fact_id)
+                    ->where('user_id', $user_id)
+                    ->delete();
+            } else{
+                Like::updateOrCreate([
+                    'fact_id' => $fact_id,
+                    'user_id' => $user_id,
+                ], [
+                    'is_like' => $vote_val,
+                ]);
+            }
         return 'Success';
         }
         return 'Something went wrong!';

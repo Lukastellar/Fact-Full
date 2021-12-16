@@ -68,8 +68,9 @@ class FactController extends Controller
     {
         $facts = Fact::withCount(['likes as likes', 'dislikes as dislikes'])->get();
         $facts_row = $facts->split(3);
+        $user_vote = Auth::user()->votedPosts()->get();
 
-        return view('pages.facts', ['facts_row' => $facts_row, 'user_vote' => Auth::user()->votedPosts()]);
+        return view('pages.facts', ['facts_row' => $facts_row, 'user_vote' => $user_vote]);
     }
 
     /**
